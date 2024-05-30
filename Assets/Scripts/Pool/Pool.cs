@@ -5,8 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Pool
-{
+
     public class Pool<T> 
     {
         Func<T> _init;
@@ -59,4 +58,3 @@ namespace Pool
         }
     }
 
-}

@@ -184,7 +184,6 @@ MonoBehaviour:
   speed: 50
   damage: 25
   spawn: {fileID: 0}
-  _firearm: {fileID: 0}
   LifeTime: 10
 --- !u!82 &7604210759359229049
 AudioSource:

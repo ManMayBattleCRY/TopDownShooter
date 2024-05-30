@@ -2,9 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pool;
 
-public class Bullet : MonoBehaviour
+public class Bullet : Pooled
 {
     [SerializeField]
     public float speed = 50f;
@@ -15,7 +14,7 @@ public class Bullet : MonoBehaviour
     public Transform spawn;
     GameObject _bl;
     public FireArm _firearm;
-    public Pool<Bullet> _pool;
+    public Pool<Pooled> _pool;
     [SerializeField]
     float LifeTime = 10f;
     float timeElapsed = 0f;
@@ -26,12 +25,13 @@ public class Bullet : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _bl = gameObject;
-        
+        _pool = pool;
     }
+
 
     private void Start()
     {
-        _pool = _firearm._bulletPool;
+
     }
 
     public void OnEnable()

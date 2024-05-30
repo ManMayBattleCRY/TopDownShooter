@@ -1,17 +1,21 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Skill : MonoBehaviour
+public class Skill : MonoBehaviour
 {
     public float castTime = 0.3f;
     public float damage = 25f;
-    public float maxAmount = 5;
+    public int maxAmount = 1;
     public float cooldown = 1f;
     [HideInInspector]
     public float ElapsedTime = 0f;
-    //[HideInInspector]
+    [HideInInspector]
     public bool isReady = true;
+    [HideInInspector]
+    public int currentAmount;
+
 
     public void SUpdate()
     {
@@ -20,12 +24,25 @@ public abstract class Skill : MonoBehaviour
         
     }
     // public abstract void SkillInit();
-    public abstract void SkillCast();
+    public virtual void SkillCast() {  }
 }
 
-public abstract class SkillFireArm : Skill
+public class SkillFireArm : Skill
 {
+    
+
+
     public byte ProjectileAmount = 1;
+
+    public void initSkill()
+    {
+
+
+
+
+    }
+
+
     public override void SkillCast()
     {
         if (isReady)
