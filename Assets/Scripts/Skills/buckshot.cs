@@ -32,18 +32,12 @@ public class buckshot : SkillFireArm
     void Awake()
     {
         initSkill();
-        Pool<Pooled> Created;
-        Pooled init() => Instantiate(bulletPrefab);
-        //init().pool = Created;
-        
-        void GetAction(Pooled prefab) => prefab.gameObject.SetActive(true);
-        void ReturnAction(Pooled prefab) => prefab.gameObject.SetActive(false);
-        Created = new Pool<Pooled>(init, GetAction, ReturnAction, maxAmount);
+
         
 
 
-        //PoolManager manager = new PoolManager();
-        //_bulletPool = manager.CreatePool(bulletPrefab, maxAmount);
+        PoolManager manager = new PoolManager();
+        _bulletPool = manager.CreatePool(bulletPrefab, maxAmount);
         currentAmount = maxAmount;
         //Instantiate(bulletPrefab); Instantiate(bulletPrefab); Instantiate(bulletPrefab); Instantiate(bulletPrefab); Instantiate(bulletPrefab);
     }

@@ -9,12 +9,14 @@ public class PoolManager : MonoBehaviour
 
     public Pool<Pooled> CreatePool(Pooled _prefab , int Amount)
     {
+        Pool<Pooled> Created;
        Pooled init() => Instantiate(_prefab);
+        
         
         void GetAction(Pooled prefab) => prefab.gameObject.SetActive(true);
         void ReturnAction(Pooled prefab) => prefab.gameObject.SetActive(false);
-        Pool <Pooled> Created = new Pool<Pooled>(init, GetAction, ReturnAction, Amount);
-       // init().pool = Created;
+         Created = new Pool<Pooled>(init, GetAction, ReturnAction, Amount);
+        
         return Created;
     }
 
