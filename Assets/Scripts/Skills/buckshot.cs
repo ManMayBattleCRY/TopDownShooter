@@ -29,12 +29,13 @@ public class buckshot : SkillFireArm
     }
 
 
-    // Start is called before the first frame update
+
     void Awake()
     {
         initSkill();
         _pm = GameObject.FindGameObjectWithTag("PoolManager").GetComponent<PoolManager>();
-        _pm.CreatePool(bulletPrefab, maxAmount, bulletPrefab.name);
+        bulletPrefab.poolName = bulletPrefab.name;
+        _pm.CreatePool(bulletPrefab, maxAmount, bulletPrefab.poolName);
         _pm.Pools.TryGetValue(bulletPrefab.name, out _bulletPool);
         currentAmount = maxAmount;
 
@@ -50,23 +51,7 @@ public class buckshot : SkillFireArm
 
 
 
-   // private void Start()
-   // {
 
-        //bulletPrefab.spawn = BulletSpawn;
-
-        //bulletPrefab.speed = BulletSpeed;
-        //bulletPrefab.damage = damage;
-        //Bullet init() => Instantiate(bulletPrefab);
-
-        //void GetAction(Bullet _bullet) => _bullet.gameObject.SetActive(true);
-        //void ReturnAction(Bullet _bullet) => _bullet.gameObject.SetActive(false);
-
-        //_bulletPool = new Pool<Bullet>(init, GetAction, ReturnAction, maxAmount);
-
-
-
-   // }
 
 
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Pooled : MonoBehaviour
 {
+    public string poolName;
+
     public Pool<Pooled> pool;
 
     public PoolManager poolManager;
@@ -12,6 +14,7 @@ public class Pooled : MonoBehaviour
     private void Awake()
     {
         poolManager = GameObject.FindGameObjectWithTag("PoolManager").GetComponent<PoolManager>();
+
     }
 
 }

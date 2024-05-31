@@ -10,7 +10,7 @@ public class BuckProj : Pooled
     // Start is called before the first frame update
     void Start()
     {
-        poolManager.Pools.TryGetValue("BulletBuck", out pool);
+        poolManager.Pools.TryGetValue(poolName, out pool);
     }
 
     // Update is called once per frame
