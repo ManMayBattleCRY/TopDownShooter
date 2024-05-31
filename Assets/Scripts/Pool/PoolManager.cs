@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
-
-
-
-    public Pool<Pooled> CreatePool(Pooled _prefab , int Amount)
+    PoolManager _pm;
+    public Dictionary<string , Pool<Pooled>> Pools;
+    private void Awake()
     {
-        Pool<Pooled> Created;
-       Pooled init() => Instantiate(_prefab);
-        
-        
-        void GetAction(Pooled prefab) => prefab.gameObject.SetActive(true);
-        void ReturnAction(Pooled prefab) => prefab.gameObject.SetActive(false);
-         Created = new Pool<Pooled>(init, GetAction, ReturnAction, Amount);
-        
-        return Created;
+        _pm = GetComponent<PoolManager>();
+        Pools = new Dictionary<string , Pool<Pooled>>();
+    }
+
+
+    public Pool<Pooled> CreatePool(Pooled _prefab , int Amount, string poolName)
+    {
+        GameObject poolParent = new GameObject(poolName + " POOL");
+        poolParent.transform.SetParent(_pm.transform, false);
+        Pool<Pooled> pref = new Pool<Pooled>(_prefab, Amount, poolParent.transform);
+        Pools.Add(poolName, pref);
+        return pref;
+
     }
 
 

@@ -1,60 +1,72 @@
-using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
+public class Pool<T> where T : MonoBehaviour
+{
+    int Amount;
+    Queue<Pooled> InActive = new Queue<Pooled>();
+    List<Pooled> Active = new List<Pooled>();
+    Transform parent;
+    public Pool(Pooled prefab, int amount, Transform _parent)
+        {
+        parent = _parent;
+        if (prefab == null)
+        {
+            Debug.Log("zapupa");
+            return;
+        }
+        else
+            for (int i = 0; i < amount; i++)
+            {
+                PrefabInit(prefab);
+            }
+    }
 
-
-    public class Pool<T> 
+    public virtual void PrefabInit(Pooled prefab) 
     {
-        Func<T> _init;
-        Action<T> _getAction;
-        Action<T> _returnAction;
-        int count;
-        Action<T> _tr;
-        Queue<T> _pool = new Queue<T>();
-        List<T> _active = new List<T>();
-        // Start is called before the first frame update
+       
+            Pooled _obj = Pooled.Instantiate(prefab, parent, false);
+           InActive.Enqueue(_obj);
+            Return(_obj);
+        
+    }
 
-        public Pool(Func<T> init, Action<T> getAction, Action<T> returnAction, int count)
+    public virtual Pooled Get(Pooled prefab) 
+    {
+        Pooled _prefab;
+         if(InActive.Count > 0)
         {
-            _init = init;
-            _getAction = getAction;
-            _returnAction = returnAction;
-
-            if (_init == null)
-            {
-                Debug.Log("zapupa");
-                return;
-            }
-
-            for (int i = 0; i < count; i++)
-                Return(_init());
-
+            _prefab = InActive.Dequeue();
+            _prefab.gameObject.SetActive(true);
         }
-
-        public T Get()
+         else
         {
-            T item = _pool.Count > 0 ? _pool.Dequeue() : _init();
-            _getAction(item);
-            _active.Add(item);
-            return item;
+            Pooled _obj = Pooled.Instantiate(prefab, parent, false);
+            _prefab = _obj;
         }
+        _prefab.gameObject.SetActive(true);
+        Active.Add(_prefab);
+        
+        return _prefab;
+        
+    }
+    public virtual void Return(Pooled prefab) 
+    {
+        prefab.gameObject.SetActive(false);
+        InActive.Enqueue(prefab);
+        Active.Remove(prefab);
+    }
 
-        public void Return(T item)
+    public void ReturnAll() 
+    {
+        foreach (Pooled item in Active.ToArray())
         {
-            _returnAction(item);
-            _pool.Enqueue(item);
-            _active.Remove(item);
-        }
-
-        public void ReturnAll()
-        {
-            foreach (T item in _active.ToArray())
-            {
-                Return(item);
-            }
+            Return(item);
         }
     }
 
+
+}

@@ -10,6 +10,7 @@ public class buckshot : SkillFireArm
     public Pooled bulletPrefab;
     public Pool<Pooled> _bulletPool;
     public float BulletSpeed = 50f;
+    PoolManager _pm;
 
     public float angle = 30f;
     float step;
@@ -21,7 +22,7 @@ public class buckshot : SkillFireArm
 
         if (isReady)
         {
-            Pooled _bullet = _bulletPool.Get();
+            Pooled _bullet = _bulletPool.Get(bulletPrefab);
         }
         base.SkillCast();
         
@@ -32,14 +33,11 @@ public class buckshot : SkillFireArm
     void Awake()
     {
         initSkill();
-
-        
-
-
-        PoolManager manager = new PoolManager();
-        _bulletPool = manager.CreatePool(bulletPrefab, maxAmount);
+        _pm = GameObject.FindGameObjectWithTag("PoolManager").GetComponent<PoolManager>();
+        _pm.CreatePool(bulletPrefab, maxAmount, bulletPrefab.name);
+        _pm.Pools.TryGetValue(bulletPrefab.name, out _bulletPool);
         currentAmount = maxAmount;
-        //Instantiate(bulletPrefab); Instantiate(bulletPrefab); Instantiate(bulletPrefab); Instantiate(bulletPrefab); Instantiate(bulletPrefab);
+
     }
 
 
@@ -52,8 +50,8 @@ public class buckshot : SkillFireArm
 
 
 
-    private void Start()
-    {
+   // private void Start()
+   // {
 
         //bulletPrefab.spawn = BulletSpawn;
 
@@ -68,7 +66,7 @@ public class buckshot : SkillFireArm
 
 
 
-    }
+   // }
 
 
 }

@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 2486691343475388423}
   - component: {fileID: 3049276896509906734}
   - component: {fileID: 5257836206851912893}
-  - component: {fileID: 7351845661011028954}
   m_Layer: 0
-  m_Name: BulletPref (1)
+  m_Name: BulletBuck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,24 +194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02c21c3fd0433ac4eba7fad015949b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  damage: 25
-  spawn: {fileID: 0}
-  _firearm: {fileID: 0}
-  LifeTime: 10
-  _buckshot: {fileID: 0}
---- !u!114 &7351845661011028954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4684667528792516795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef934963b12996649a70e695870fa4d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  pool: {fileID: 0}
+  _pm: {fileID: 0}
 --- !u!1 &7441003512034086076
 GameObject:
   m_ObjectHideFlags: 0
