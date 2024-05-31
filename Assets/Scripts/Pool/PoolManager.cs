@@ -5,10 +5,12 @@ using UnityEngine;
 public class PoolManager : MonoBehaviour
 {
     PoolManager _pm;
+    GameObject _pm_obj;
     public Dictionary<string , Pool<Pooled>> Pools;
     private void Awake()
     {
-        _pm = GetComponent<PoolManager>();
+        _pm_obj = GameObject.FindGameObjectWithTag("PoolManager");
+        _pm = _pm_obj.GetComponent<PoolManager>();
         Pools = new Dictionary<string , Pool<Pooled>>();
     }
 
@@ -16,7 +18,7 @@ public class PoolManager : MonoBehaviour
     public Pool<Pooled> CreatePool(Pooled _prefab , int Amount, string poolName)
     {
         GameObject poolParent = new GameObject(poolName + " POOL");
-        poolParent.transform.SetParent(_pm.transform, false);
+        poolParent.transform.SetParent(_pm_obj.transform, false);
         Pool<Pooled> pref = new Pool<Pooled>(_prefab, Amount, poolParent.transform);
         Pools.Add(poolName, pref);
         return pref;

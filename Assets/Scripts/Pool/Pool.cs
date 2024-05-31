@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Progress;
 
-public class Pool<T> where T : MonoBehaviour
+public class Pool<Pooled> where Pooled  : MonoBehaviour
 {
     int Amount;
     Queue<Pooled> InActive = new Queue<Pooled>();
@@ -27,8 +27,8 @@ public class Pool<T> where T : MonoBehaviour
 
     public virtual void PrefabInit(Pooled prefab) 
     {
-       
-            Pooled _obj = Pooled.Instantiate(prefab, parent, false);
+
+        Pooled _obj = UnityEngine.GameObject.Instantiate(prefab, parent, false);
            InActive.Enqueue(_obj);
             Return(_obj);
         
@@ -44,7 +44,7 @@ public class Pool<T> where T : MonoBehaviour
         }
          else
         {
-            Pooled _obj = Pooled.Instantiate(prefab, parent, false);
+            Pooled _obj = UnityEngine.GameObject.Instantiate(prefab, parent, false);
             _prefab = _obj;
         }
         _prefab.gameObject.SetActive(true);

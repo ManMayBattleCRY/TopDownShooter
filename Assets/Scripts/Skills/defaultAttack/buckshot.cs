@@ -12,16 +12,9 @@ public class buckshot : UsingProjectiles
     float step;
     
 
-    public override void SkillCast()
+    public  void SkillCast()
     {
-
-
-        if (isReady)
-        {
-            Pooled _Projectile = _ProjectilePool.Get(ProjectilePrefab);
-        }
-        base.SkillCast();
-        
+        V_SkillCast();
     }
 
 
@@ -38,7 +31,8 @@ public class buckshot : UsingProjectiles
     // Update is called once per frame
     void Update()
     {
-        V_Update();
+        V_ElapsedTime();
+       // Debug.Log(ElapsedTime);
         if (Input.GetButtonDown("CastSpell")) SkillCast();
     }
 

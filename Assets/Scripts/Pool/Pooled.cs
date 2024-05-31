@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Pooled : MonoBehaviour
+public abstract class Pooled : MonoBehaviour
 {
     public string poolName;
 

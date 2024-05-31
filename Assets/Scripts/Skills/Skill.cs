@@ -17,12 +17,11 @@ public abstract class Skill : MonoBehaviour
     public int currentAmount;
 
 
-    public virtual void V_Update()
+    public void V_ElapsedTime()
     {
         if(ElapsedTime >= cooldown) { isReady = true; }
                                else { ElapsedTime += Time.deltaTime; }
         
     }
-    // public abstract void SkillInit();
-    public virtual void SkillCast() {  }
+
 }

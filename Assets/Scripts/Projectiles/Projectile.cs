@@ -2,17 +2,76 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Projectile : Pooled
+public class Projectile : Pooled
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
+    public float speed = 50f;
+    public float damage = 25f;
+    Rigidbody _rb;
+    [HideInInspector]
+    public Transform spawn;
+    GameObject _bl;
+    [SerializeField]
+    float LifeTime = 10f;
+    float timeElapsed = 0f;
+
+
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        
+        LifeTimeKill();
     }
+
+   public void Start()
+    {
+        _rb = GetComponent<Rigidbody>();
+        _bl = gameObject;
+        poolManager.Pools.TryGetValue(poolName, out pool);
+    }
+
+    public virtual void V_OnEnabale()
+    {
+        transform.position = spawn.transform.position;
+        transform.rotation = spawn.transform.rotation;
+        _rb.AddForce(spawn.transform.forward * speed, ForceMode.Impulse);
+    }
+
+    public virtual void Collision(Collision collision)
+    {
+        _rb.velocity = Vector3.zero;
+        if (collision.gameObject.GetComponent<HP>())
+        {
+            HP _obj = collision.gameObject.GetComponent<HP>();
+            MakeDamage(_obj);
+        }
+        pool.Return(this);
+    }
+
+    void MakeDamage(HP _obj)
+    {
+        if (_obj.hp - damage > 0)
+        {
+            _obj.hp -= damage;
+        }
+        else Destroy(_obj.gameObject);
+    }
+
+    public void LifeTimeKill()
+    {
+
+        timeElapsed += Time.deltaTime;
+        if (timeElapsed >= LifeTime)
+        {
+            _rb.velocity = Vector3.zero;
+            timeElapsed = 0f;
+            pool.Return(this);
+        }
+    }
+
+    //void OnCollisionEnter(Collision collision)
+    //{
+    //    Collision(collision);
+    //}
+
 }

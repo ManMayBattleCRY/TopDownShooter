@@ -8,10 +8,10 @@ public abstract class UsingProjectiles : Skill
     public Pooled ProjectilePrefab;
     public Pool<Pooled> _ProjectilePool;
     public float ProjectileSpeed = 50f;
-    PoolManager _pm;
+    public PoolManager _pm;
 
     public byte ProjectileAmount = 1;
-
+    public int i = 0;
     public void initSkill()
     {
 
@@ -21,10 +21,12 @@ public abstract class UsingProjectiles : Skill
     }
 
 
-    public override void SkillCast()
-    {
+    public void V_SkillCast()
+    { 
         if (isReady)
         {
+            Pooled _Projectile = _ProjectilePool.Get(ProjectilePrefab);
+            if (_Projectile != null) { Debug.Log("не ноль " + i); i++; }
             ElapsedTime = 0;
             isReady = false;
 
@@ -36,7 +38,8 @@ public abstract class UsingProjectiles : Skill
         _pm = GameObject.FindGameObjectWithTag("PoolManager").GetComponent<PoolManager>();
         ProjectilePrefab.poolName = ProjectilePrefab.name;
         _pm.CreatePool(ProjectilePrefab, maxAmount, ProjectilePrefab.poolName);
-        _pm.Pools.TryGetValue(ProjectilePrefab.name, out _ProjectilePool);
+        _pm.Pools.TryGetValue(ProjectilePrefab.poolName, out _ProjectilePool);
+        Debug.Log(ProjectilePrefab.poolName);
         currentAmount = maxAmount;
     }
 

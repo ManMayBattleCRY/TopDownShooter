@@ -94,8 +94,8 @@ GameObject:
   - component: {fileID: 6532559349575617578}
   - component: {fileID: 2957907118770765746}
   - component: {fileID: 7184691622455100631}
-  - component: {fileID: 1258559956815753645}
   - component: {fileID: 7604210759359229049}
+  - component: {fileID: -319508027506860499}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -169,22 +169,6 @@ CapsuleCollider:
   m_Height: 1.13
   m_Direction: 2
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &1258559956815753645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5392610155289827963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 773c593e61d756840a067ce5ac25bda1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 50
-  damage: 25
-  spawn: {fileID: 0}
-  LifeTime: 10
 --- !u!82 &7604210759359229049
 AudioSource:
   m_ObjectHideFlags: 0
@@ -281,3 +265,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-319508027506860499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5392610155289827963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 773c593e61d756840a067ce5ac25bda1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolName: 
+  poolManager: {fileID: 0}
