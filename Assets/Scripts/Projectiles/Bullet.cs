@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : Pooled
+public class Bullet : Projectile
 {
     [SerializeField]
     public float speed = 50f;

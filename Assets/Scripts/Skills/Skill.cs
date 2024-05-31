@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill : MonoBehaviour
+public abstract class Skill : MonoBehaviour
 {
     public float castTime = 0.3f;
     public float damage = 25f;
@@ -17,7 +17,7 @@ public class Skill : MonoBehaviour
     public int currentAmount;
 
 
-    public void SUpdate()
+    public virtual void V_Update()
     {
         if(ElapsedTime >= cooldown) { isReady = true; }
                                else { ElapsedTime += Time.deltaTime; }
@@ -25,31 +25,4 @@ public class Skill : MonoBehaviour
     }
     // public abstract void SkillInit();
     public virtual void SkillCast() {  }
-}
-
-public class SkillFireArm : Skill
-{
-    
-
-
-    public byte ProjectileAmount = 1;
-
-    public void initSkill()
-    {
-
-
-
-
-    }
-
-
-    public override void SkillCast()
-    {
-        if (isReady)
-        {
-            ElapsedTime = 0;
-            isReady = false;
-        
-        }
-    }
 }
