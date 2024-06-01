@@ -6,7 +6,10 @@ public class PoolManager : MonoBehaviour
 {
     PoolManager _pm;
     GameObject _pm_obj;
+    public Pool<Pooled> pref;
     public Dictionary<string , Pool<Pooled>> Pools;
+
+
     private void Awake()
     {
         _pm_obj = GameObject.FindGameObjectWithTag("PoolManager");
@@ -19,7 +22,7 @@ public class PoolManager : MonoBehaviour
     {
         GameObject poolParent = new GameObject(poolName + " POOL");
         poolParent.transform.SetParent(_pm_obj.transform, false);
-        Pool<Pooled> pref = new Pool<Pooled>(_prefab, Amount, poolParent.transform);
+        pref = new Pool<Pooled>(_prefab, Amount, poolParent.transform);
         Pools.Add(poolName, pref);
         return pref;
 

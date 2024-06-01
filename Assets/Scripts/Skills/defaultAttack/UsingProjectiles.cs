@@ -5,13 +5,12 @@ using UnityEngine;
 public abstract class UsingProjectiles : Skill
 {
     public Transform ProjectileSpawn;
-    public Pooled ProjectilePrefab;
+    public Projectile ProjectilePrefab;
     public Pool<Pooled> _ProjectilePool;
     public float ProjectileSpeed = 50f;
     public PoolManager _pm;
 
     public byte ProjectileAmount = 1;
-    public int i = 0;
     public void initSkill()
     {
 
@@ -25,8 +24,7 @@ public abstract class UsingProjectiles : Skill
     { 
         if (isReady)
         {
-            Pooled _Projectile = _ProjectilePool.Get(ProjectilePrefab);
-            if (_Projectile != null) { Debug.Log("не ноль " + i); i++; }
+            Pooled Projectile = _ProjectilePool.Get(ProjectilePrefab);
             ElapsedTime = 0;
             isReady = false;
 
@@ -35,11 +33,11 @@ public abstract class UsingProjectiles : Skill
     // Start is called before the first frame update
     public void V_Awake()
     {
+        ProjectilePrefab.spawn = ProjectileSpawn;
         _pm = GameObject.FindGameObjectWithTag("PoolManager").GetComponent<PoolManager>();
         ProjectilePrefab.poolName = ProjectilePrefab.name;
         _pm.CreatePool(ProjectilePrefab, maxAmount, ProjectilePrefab.poolName);
         _pm.Pools.TryGetValue(ProjectilePrefab.poolName, out _ProjectilePool);
-        Debug.Log(ProjectilePrefab.poolName);
         currentAmount = maxAmount;
     }
 

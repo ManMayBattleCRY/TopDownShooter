@@ -11,10 +11,9 @@ public abstract class Pooled : MonoBehaviour
 
     public PoolManager poolManager;
 
-    private void Awake()
+    public void V_Awake()
     {
         poolManager = GameObject.FindGameObjectWithTag("PoolManager").GetComponent<PoolManager>();
-
     }
 
 }

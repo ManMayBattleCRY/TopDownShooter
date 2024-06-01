@@ -10,6 +10,7 @@ public class BuckProj : Pooled
     // Start is called before the first frame update
     void Start()
     {
+        poolManager = GameObject.FindGameObjectWithTag("PoolManager").GetComponent<PoolManager>();
         poolManager.Pools.TryGetValue(poolName, out pool);
     }
 

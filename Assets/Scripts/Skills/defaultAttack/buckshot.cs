@@ -32,8 +32,11 @@ public class buckshot : UsingProjectiles
     void Update()
     {
         V_ElapsedTime();
-       // Debug.Log(ElapsedTime);
-        if (Input.GetButtonDown("CastSpell")) SkillCast();
+        if (Input.GetButton("CastSpell"))
+        {
+            SkillCast();
+            //Debug.Log(_pm.pref.InActive.Count);
+        }
     }
 
 

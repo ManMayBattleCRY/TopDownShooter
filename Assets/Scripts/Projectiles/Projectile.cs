@@ -23,10 +23,16 @@ public class Projectile : Pooled
         LifeTimeKill();
     }
 
-   public void Start()
+   public void Awake()
     {
+        V_Awake();
         _rb = GetComponent<Rigidbody>();
         _bl = gameObject;
+        
+    }
+
+    private void Start()
+    {
         poolManager.Pools.TryGetValue(poolName, out pool);
     }
 
@@ -45,7 +51,7 @@ public class Projectile : Pooled
             HP _obj = collision.gameObject.GetComponent<HP>();
             MakeDamage(_obj);
         }
-        pool.Return(this);
+        pool.Return(gameObject.GetComponent<Projectile>());
     }
 
     void MakeDamage(HP _obj)
@@ -65,13 +71,13 @@ public class Projectile : Pooled
         {
             _rb.velocity = Vector3.zero;
             timeElapsed = 0f;
-            pool.Return(this);
+            pool.Return(gameObject.GetComponent<Projectile>());
         }
     }
 
-    //void OnCollisionEnter(Collision collision)
-    //{
-    //    Collision(collision);
-    //}
+    void OnCollisionEnter(Collision collision)
+    {
+        Collision(collision);
+    }
 
 }

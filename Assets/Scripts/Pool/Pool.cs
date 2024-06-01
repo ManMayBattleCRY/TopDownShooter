@@ -7,7 +7,7 @@ using static UnityEditor.Progress;
 public class Pool<Pooled> where Pooled  : MonoBehaviour
 {
     int Amount;
-    Queue<Pooled> InActive = new Queue<Pooled>();
+    public Queue<Pooled> InActive = new Queue<Pooled>();
     List<Pooled> Active = new List<Pooled>();
     Transform parent;
     public Pool(Pooled prefab, int amount, Transform _parent)
@@ -29,7 +29,7 @@ public class Pool<Pooled> where Pooled  : MonoBehaviour
     {
 
         Pooled _obj = UnityEngine.GameObject.Instantiate(prefab, parent, false);
-           InActive.Enqueue(_obj);
+        Active.Add(_obj);
             Return(_obj);
         
     }
@@ -40,12 +40,11 @@ public class Pool<Pooled> where Pooled  : MonoBehaviour
          if(InActive.Count > 0)
         {
             _prefab = InActive.Dequeue();
-            _prefab.gameObject.SetActive(true);
+
         }
          else
         {
-            Pooled _obj = UnityEngine.GameObject.Instantiate(prefab, parent, false);
-            _prefab = _obj;
+            _prefab = UnityEngine.GameObject.Instantiate(prefab, parent, false);
         }
         _prefab.gameObject.SetActive(true);
         Active.Add(_prefab);
@@ -55,9 +54,11 @@ public class Pool<Pooled> where Pooled  : MonoBehaviour
     }
     public virtual void Return(Pooled prefab) 
     {
-        prefab.gameObject.SetActive(false);
+
         InActive.Enqueue(prefab);
+       // Debug.Log(InActive.Count);
         Active.Remove(prefab);
+        prefab.gameObject.SetActive(false);
     }
 
     public void ReturnAll() 

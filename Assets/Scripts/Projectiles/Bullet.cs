@@ -3,10 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : Pooled
+public class Bullet : Projectile
 {
 
+    private void OnEnable()
+    {
+        V_OnEnabale();
+    }
 
-   
-   
+
+
 }
