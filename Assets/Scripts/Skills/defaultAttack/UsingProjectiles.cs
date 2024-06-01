@@ -11,26 +11,18 @@ public abstract class UsingProjectiles : Skill
     public PoolManager _pm;
 
     public byte ProjectileAmount = 1;
-    public void initSkill()
-    {
 
+    //public void SkillCast()
+    //{ 
+    //    if (isReady)
+    //    {
+    //        Pooled Projectile = _ProjectilePool.Get(ProjectilePrefab);
+    //        ElapsedTime = 0;
+    //        isReady = false;
 
+    //    }
+    //}
 
-
-    }
-
-
-    public void V_SkillCast()
-    { 
-        if (isReady)
-        {
-            Pooled Projectile = _ProjectilePool.Get(ProjectilePrefab);
-            ElapsedTime = 0;
-            isReady = false;
-
-        }
-    }
-    // Start is called before the first frame update
     public void V_Awake()
     {
         ProjectilePrefab.spawn = ProjectileSpawn;
