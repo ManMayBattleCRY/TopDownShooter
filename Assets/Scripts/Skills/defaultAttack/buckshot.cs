@@ -18,13 +18,15 @@ public class buckshot : UsingProjectiles
         {
             Vector3 _spawnPosition = ProjectileSpawn.position;
             float _x = ProjectileSpawn.position.x;
+            float _z = ProjectileSpawn.position.z;
             for (float i = 0; i * step <= Angle; i++)
             {
-                ProjectileSpawn.position = new Vector3(_x + angleReturn(i), 
+               // transform.localPosition.y;
+                ProjectileSpawn.position = new Vector3 (transform.InverseTransformDirection(_x + angleReturn(i) , 0 ,0).x , 
                                                         ProjectileSpawn.position.y,
-                                                        ProjectileSpawn.position.z);
-                Debug.Log(ProjectileSpawn.position);
-                Debug.Log(angleReturn(i));
+                                                        _z );
+                Debug.Log(transform.TransformDirection(transform.InverseTransformDirection(_x + angleReturn(i), 0, 0).x , 0 ,0).x);
+               // Debug.Log(angleReturn(i));
                 Pooled Projectile = _ProjectilePool.Get(ProjectilePrefab);
             }
             ProjectileSpawn.position = _spawnPosition;
