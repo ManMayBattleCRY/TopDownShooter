@@ -9,27 +9,30 @@ public class buckshot : UsingProjectiles
 
     public float Angle = 30f;
     float minusAngle;
-    float step = 5f;
+    public float step = 5f;
     float stepAmount;
 
     public  void SkillCast()
     {
         if (isReady)
         {
-            Vector3 _spawnPosition = ProjectileSpawn.position;
+            Vector3 _sp = ProjectileSpawn.position;
+            Transform _spawnPosition = ProjectileSpawn;
             float _x = ProjectileSpawn.position.x;
             float _z = ProjectileSpawn.position.z;
             for (float i = 0; i * step <= Angle; i++)
             {
-               // transform.localPosition.y;
-                ProjectileSpawn.position = new Vector3 (transform.InverseTransformDirection(_x + angleReturn(i) , 0 ,0).x , 
+               
+                ProjectileSpawn.position = new Vector3 (_x + angleReturn(i) * ProjectileSpawn.right.x, 
                                                         ProjectileSpawn.position.y,
-                                                        _z );
-                Debug.Log(transform.TransformDirection(transform.InverseTransformDirection(_x + angleReturn(i), 0, 0).x , 0 ,0).x);
-               // Debug.Log(angleReturn(i));
+                                                        _z + angleReturn(i) * ProjectileSpawn.right.z);
+               
+                //Debug.Log(ProjectileSpawn.forward.z + " z forward " + ProjectileSpawn.forward.x + " x forward \n" 
+                //    + ProjectileSpawn.right.x + " right x " + ProjectileSpawn.right.z + " right z");
+                // forward x и right z не равны друг другу z со знаком минус!!!
                 Pooled Projectile = _ProjectilePool.Get(ProjectilePrefab);
             }
-            ProjectileSpawn.position = _spawnPosition;
+            ProjectileSpawn.position = _sp;
             ElapsedTime = 0;
             isReady = false;
 

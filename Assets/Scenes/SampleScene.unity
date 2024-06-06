@@ -10646,7 +10646,7 @@ MonoBehaviour:
   ProjectileSpeed: 50
   _pm: {fileID: 0}
   ProjectileAmount: 1
-  angle: 30
+  Angle: 30
 --- !u!1 &8040034544418998994
 GameObject:
   m_ObjectHideFlags: 0
