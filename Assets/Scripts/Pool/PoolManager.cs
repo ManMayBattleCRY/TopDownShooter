@@ -17,7 +17,10 @@ public class PoolManager : MonoBehaviour
         Pools = new Dictionary<string , Pool<Pooled>>();
     }
 
-
+    private void Start()
+    {
+        
+    }
     public Pool<Pooled> CreatePool(Pooled _prefab , int Amount, string poolName)
     {
         GameObject poolParent = new GameObject(poolName + " POOL");

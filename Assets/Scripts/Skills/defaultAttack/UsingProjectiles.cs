@@ -23,7 +23,7 @@ public abstract class UsingProjectiles : Skill
     //    }
     //}
 
-    public void V_Awake()
+    public void V_Start()
     {
         ProjectilePrefab.spawn = ProjectileSpawn;
         _pm = GameObject.FindGameObjectWithTag("PoolManager").GetComponent<PoolManager>();
