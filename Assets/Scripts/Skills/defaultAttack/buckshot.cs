@@ -6,7 +6,8 @@ using UnityEngine;
 public class buckshot : UsingProjectiles
 {
 
-
+    [SerializeField]
+    Sounds _sounds;
     public float Angle = 30f;
     float minusAngle;
     public float step = 5f;
@@ -16,6 +17,7 @@ public class buckshot : UsingProjectiles
     {
         if (isReady)
         {
+            _sounds.PlaySound(_sounds.sounds[0], volume: 0.7f);
             Vector3 _sp = ProjectileSpawn.position;
             Transform _spawnPosition = ProjectileSpawn;
             float _x = ProjectileSpawn.position.x;
@@ -45,9 +47,14 @@ public class buckshot : UsingProjectiles
     {
         Angle /= 10f;
         step /= 10f;
-        V_Awake();
         float trueAngle = Angle/2;
         minusAngle = trueAngle * -1;
+        
+    }
+
+    private void Start()
+    {
+        V_Start();
     }
 
     float angleReturn( float i)
@@ -59,7 +66,7 @@ public class buckshot : UsingProjectiles
     void Update()
     {
         V_ElapsedTime();
-        if (Input.GetButtonDown("CastSpell"))
+        if (Input.GetButtonDown("Fire1"))
         {
             SkillCast();
             //Debug.Log(_pm.pref.InActive.Count);
