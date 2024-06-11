@@ -11,10 +11,11 @@ public class Projectile : Pooled
     [HideInInspector]
     public Transform spawn;
     GameObject _bl;
+
     [SerializeField]
     float LifeTime = 10f;
     float timeElapsed = 0f;
-
+    public LVLController lvl;
 
 
     // Update is called once per frame
@@ -34,6 +35,7 @@ public class Projectile : Pooled
     private void Start()
     {
         poolManager.Pools.TryGetValue(poolName, out pool);
+        lvl = GameObject.FindGameObjectWithTag("Player").GetComponent<LVLController>();
     }
 
     public virtual void V_OnEnabale()
@@ -60,7 +62,12 @@ public class Projectile : Pooled
         {
             _obj.hp -= damage;
         }
-        else Destroy(_obj.gameObject);
+        else
+        {
+            Destroy(_obj.gameObject);
+            lvl.ExpirienceGet(90f);
+        }
+            
     }
 
     public void LifeTimeKill()

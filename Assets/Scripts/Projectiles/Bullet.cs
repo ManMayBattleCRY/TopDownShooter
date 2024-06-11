@@ -11,6 +11,11 @@ public class Bullet : Projectile
         V_OnEnabale();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        Collision(collision);
+    }
+
 
 
 }

@@ -7,7 +7,7 @@ public class Weapon : UsingProjectiles
 
     [SerializeField]
     Sounds _sounds;
-    public void SkillCast()
+    public override void FireAProjectile()
     {
         if (isReady)
         {
@@ -19,13 +19,15 @@ public class Weapon : UsingProjectiles
         }
     }
 
+    public override bool InputButtonMod()
+    {
+        return Input.GetButton("Fire1");
+    }
+
     void Update()
     {
-        V_ElapsedTime();
-        if (Input.GetButton("Fire1"))
-        {
-            SkillCast();
-        }
+       
+        V_Update();
     }
 
     void Start()
@@ -33,4 +35,8 @@ public class Weapon : UsingProjectiles
         V_Start();
     }
 
+    private void OnEnable()
+    {
+        V_OnEnable();
+    }
 }

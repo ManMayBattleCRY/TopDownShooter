@@ -13,7 +13,7 @@ public class buckshot : UsingProjectiles
     public float step = 5f;
     float stepAmount;
 
-    public  void SkillCast()
+    public override void FireAProjectile()
     {
         if (isReady)
         {
@@ -65,17 +65,18 @@ public class buckshot : UsingProjectiles
     // Update is called once per frame
     void Update()
     {
-        V_ElapsedTime();
-        if (Input.GetButtonDown("Fire1"))
-        {
-            SkillCast();
-            //Debug.Log(_pm.pref.InActive.Count);
-        }
+      V_Update();
     }
 
+    private void OnEnable()
+    {
+        V_OnEnable();
+    }
 
-
-
+    public override bool InputButtonMod()
+    {
+        return Input.GetButtonDown("Fire1");
+    }
 
 
 }

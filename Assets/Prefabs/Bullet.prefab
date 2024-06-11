@@ -186,3 +186,4 @@ MonoBehaviour:
   damage: 25
   spawn: {fileID: 0}
   LifeTime: 5
+  lvl: {fileID: 0}
