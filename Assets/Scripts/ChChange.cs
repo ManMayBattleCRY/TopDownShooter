@@ -22,7 +22,7 @@ public class ChChange : MonoBehaviour
         _proj.damage = _proj.damage + _proj.damage * damage;
         _proj.ProjectilePrefab.damage = _proj.damage;
         Debug.Log(_proj.ProjectilePrefab.damage);
-        S_DamageText.text ="Damege: " + _proj.damage;
+        S_DamageText.text ="Damage: " + _proj.damage;
     }
 
     public void AttackSpeedChange(Text tex)
@@ -49,7 +49,7 @@ public class ChChange : MonoBehaviour
 
     private void Start()
     {
-        S_DamageText.text = "Damege: " + _proj.damage;
+        S_DamageText.text = "Damage: " + _proj.damage;
         S_AttackSpeedText.text = "Attack Speed: " + _proj.cooldown.ToString();
         S_MaxAmmoAmountText.text = "Max Ammo: " + _proj.MaxAmmoAmount;
         S_ReloadTime.text = "Reload Time: " + _proj.ReloadTime;
