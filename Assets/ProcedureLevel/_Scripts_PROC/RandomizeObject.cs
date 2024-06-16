@@ -33,12 +33,6 @@ public class RandomizeObject : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void MaterialChange()
     {
         if (MaterialRandom)

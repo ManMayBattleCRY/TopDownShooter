@@ -10,7 +10,7 @@ public class DestroyWithChance : MonoBehaviour
     public float ChanceToDestroy = 0f;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         RandomDestroy();
     }

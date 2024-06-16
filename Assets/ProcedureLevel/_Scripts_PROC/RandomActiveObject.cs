@@ -8,7 +8,7 @@ public class RandomActiveObject : MonoBehaviour
     public GameObject[] _prefabs; 
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         RandomActivate();
     }

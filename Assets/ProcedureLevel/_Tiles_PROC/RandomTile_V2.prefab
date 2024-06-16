@@ -44,6 +44,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8959182758911942350}
+  - component: {fileID: 1400113054619760919}
   m_Layer: 0
   m_Name: RandomTile_V2
   m_TagString: Untagged
@@ -70,6 +71,18 @@ Transform:
   - {fileID: 7876764773000859808}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1400113054619760919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408036709005782492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7ad6a9e3e48e184dbc28d10d757ccf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &522345456897830269
 GameObject:
   m_ObjectHideFlags: 0
