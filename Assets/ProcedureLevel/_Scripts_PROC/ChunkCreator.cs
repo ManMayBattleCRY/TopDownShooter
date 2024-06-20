@@ -24,23 +24,23 @@ public class ChunkCreator : MonoBehaviour
     // Start is called before the first frame update
   //  IEnumerator 
         void Start()
-    {
-       midX = GridWidthX / 2;
-       midY = GridLengthY / 2;
-
-        SpawnedTiles = new Tile[GridWidthX, GridLengthY];
-
-        SpawnedTiles[midX, midY] = StartingTile;
-
-        for (int i = 0; i < TileSpawn; i++) 
         {
+            midX = GridWidthX / 2;
+            midY = GridLengthY / 2;
+
+            SpawnedTiles = new Tile[GridWidthX, GridLengthY];
+
+             SpawnedTiles[midX, midY] = StartingTile;
+
+            for (int i = 0; i < TileSpawn; i++) 
+            {
             PlaceTile();
-           // yield return new WaitForSecondsRealtime(0.3f);
-        }
+            }
 
-       
+
+      ActivateDoor();
     }
-
+        
     void PlaceTile()
     {
         HashSet<Vector2Int> VacantPloaces = new HashSet<Vector2Int>();
@@ -71,4 +71,24 @@ public class ChunkCreator : MonoBehaviour
     }
 
 
+
+    public void ActivateDoor()
+    {
+
+        for (int x = 0; x < SpawnedTiles.GetLength(0); x++)
+        {
+            for (int y = 0; y < SpawnedTiles.GetLength(1); y++)
+            {
+                if (SpawnedTiles[x, y] == null) continue;
+
+                int max_X = SpawnedTiles.GetLength(0) - 1;
+                int max_Y = SpawnedTiles.GetLength(1) - 1;
+
+                if (x > 0 && SpawnedTiles[x - 1, y] == null && SpawnedTiles[x, y] != null) SpawnedTiles[x,y].WallL.SetActive(true);
+                if (x < max_X && SpawnedTiles[x + 1, y] == null && SpawnedTiles[x, y] != null) SpawnedTiles[x, y].WallR.SetActive(true);
+                if (y > 0 && SpawnedTiles[x, y - 1] == null && SpawnedTiles[x, y] != null) SpawnedTiles[x, y].WallD.SetActive(true);
+                if (y < max_Y && SpawnedTiles[x, y + 1] == null && SpawnedTiles[x, y] != null) SpawnedTiles[x, y].WallU.SetActive(true);
+            }
+        }
+    }
 }
