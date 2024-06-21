@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-
+    public Chunk _creator;
     Transform Parent;
     public GameObject[] Walls;
     public GameObject[] Doors;
@@ -24,13 +24,13 @@ public class Tile : MonoBehaviour
 
     ///////////////////////////////////////////////
 
-  //  [HideInInspector]
+    [HideInInspector]
     public GameObject WallU;
-  //  [HideInInspector]
+    [HideInInspector]
     public GameObject WallD;
-   // [HideInInspector]
+    [HideInInspector]
     public GameObject WallR;
-  //  [HideInInspector]
+    [HideInInspector]
     public GameObject WallL;
 
 
@@ -44,7 +44,7 @@ public class Tile : MonoBehaviour
         if (Walls[0] != null) SpawnAndDisactivate(Walls,false);
         if (Doors[0] != null) SpawnAndDisactivate(Doors, true);
         gameObject.GetComponent<RandomizeObject>().RotateDoors();
-
+        _creator.TileSpawned += 1;
     }
 
     void SpawnAndDisactivate( GameObject[] _object, bool predictor)
