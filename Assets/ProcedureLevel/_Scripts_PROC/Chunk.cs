@@ -36,10 +36,10 @@ public class Chunk : MonoBehaviour
  
         void Start()
         {
-        
-         StartCoroutine(ChunkCreate());
 
-        }
+         StartCoroutine(ChunkCreate());
+        Debug.Log(SpawnedTiles.GetLongLength(0));
+    }
         
     void PlaceTile()
     {
@@ -47,9 +47,9 @@ public class Chunk : MonoBehaviour
 
  
 
-        for (int x = 0; x < SpawnedTiles.GetLength(0); x++)
+        for (int x = 0; x < SpawnedTiles.GetLength(0) ; x++)
         {
-            for (int y = 0; y < SpawnedTiles.GetLength(1); y++)
+            for (int y = 0; y < SpawnedTiles.GetLength(1) ; y++)
             {
                 if (SpawnedTiles[x, y] == null) continue;
 
@@ -165,23 +165,23 @@ public class Chunk : MonoBehaviour
 
 
 
-        for (int x = 0; x < SpawnedTiles.GetLength(0); x++)
+        for (int x = 0; x < SpawnedTiles.GetLength(0) ; x++)
         {
-            for (int y = midY; y < SpawnedTiles.GetLength(1); y++)
+            for (int y = midY; y < SpawnedTiles.GetLength(1) ; y++)
             {
                 if (SpawnedTiles[x, y] != null && y > maxY) { maxY = y; maxY_X = x; }
             }
         }
 
-        for (int y = 0; y < SpawnedTiles.GetLength(1); y++)
+        for (int y = 0; y < SpawnedTiles.GetLength(1) ; y++)
         {
-            for (int x = midX; x < SpawnedTiles.GetLength(0); x++)
+            for (int x = midX; x < SpawnedTiles.GetLength(0) ; x++)
             {
                 if (SpawnedTiles[x, y] != null && x > maxX) { maxX = x; maxX_Y = y; }
             }
         }
 
-        for (int x = 0; x < SpawnedTiles.GetLength(0); x++)
+        for (int x = 0; x < SpawnedTiles.GetLength(0) ; x++)
         {
             for (int y = midY; y >= 0; y--)
             {

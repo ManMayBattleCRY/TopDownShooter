@@ -500,13 +500,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acdcc015cdee6844c8c960b70b07ece1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DoorU: {fileID: 0}
+  DoorD: {fileID: 0}
+  DoorR: {fileID: 0}
+  DoorL: {fileID: 0}
   TileSpawned: 0
   tilePrefabs:
   - {fileID: 8716258443981502059, guid: 40978f30fe8012b4fa3d99ad3cf9fc5e, type: 3}
   TileWidth: 8
   GridWidthX: 10
   GridLengthY: 10
-  TileSpawn: 17
+  TileSpawn: 25
 --- !u!4 &1230526764
 Transform:
   m_ObjectHideFlags: 0
