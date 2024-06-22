@@ -325,6 +325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5148594387671341491}
   - component: {fileID: 1364628171090420831}
+  - component: {fileID: 6286828007403540796}
   m_Layer: 0
   m_Name: DefaultRandomTile
   m_TagString: Untagged
@@ -363,6 +364,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ad6a9e3e48e184dbc28d10d757ccf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _creator: {fileID: 0}
+  Walls:
+  - {fileID: 1103355729928417088, guid: 468da504da19a3d468f3c13234e9c2be, type: 3}
+  Doors:
+  - {fileID: 8015786721189189193, guid: e7badbe3193178f4b9a1b88f33c62185, type: 3}
+  TileWidth: 8
+  DoorU: {fileID: 0}
+  DoorD: {fileID: 0}
+  DoorR: {fileID: 0}
+  DoorL: {fileID: 0}
+  WallU: {fileID: 0}
+  WallD: {fileID: 0}
+  WallR: {fileID: 0}
+  WallL: {fileID: 0}
+--- !u!114 &6286828007403540796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5138525384574154749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff89c70a06f0628448d0414bb4a7964f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsRandomRotate: 0
+  xRotateble: 0
+  yRotateble: 0
+  zRotateble: 0
+  IsCube: 1
+  MaterialRandom: 0
+  materials: []
 --- !u!1 &5428062186045443704
 GameObject:
   m_ObjectHideFlags: 0

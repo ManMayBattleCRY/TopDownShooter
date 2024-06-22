@@ -5,6 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 public class Chunk : MonoBehaviour
 {
+    public SpawnerBehaviorEntity PlayerSpawner;
+
     [HideInInspector]
     public GameObject DoorU;
     [HideInInspector]
@@ -36,9 +38,7 @@ public class Chunk : MonoBehaviour
  
         void Start()
         {
-
          StartCoroutine(ChunkCreate());
-        Debug.Log(SpawnedTiles.GetLongLength(0));
     }
         
     void PlaceTile()
@@ -63,7 +63,7 @@ public class Chunk : MonoBehaviour
             }
         }
 
-        Tile _tile = Instantiate(tilePrefabs[Random.Range(0, tilePrefabs.Length)]);
+        Tile _tile = Instantiate(tilePrefabs[Random.Range(0, tilePrefabs.Length)].SetCreator(this));
         Vector2Int _position = VacantPloaces.ElementAt(Random.Range(0, VacantPloaces.Count));
         _tile.transform.position = new Vector3(_position.x - midX , 0, _position.y - midY ) * TileWidth;
         _tile._creator = this;
@@ -125,7 +125,7 @@ public class Chunk : MonoBehaviour
     IEnumerator ChunkCreate()
     {
         transform.position = Vector3.zero;
-        StartingTile = Instantiate(tilePrefabs[Random.Range(0, tilePrefabs.Length)]);
+        StartingTile = Instantiate(tilePrefabs[Random.Range(0, tilePrefabs.Length)].SetCreator(this));
         StartingTile.transform.position = Vector3.zero;
         StartingTile._creator = this;
         StartingTile.transform.parent = transform;
@@ -149,6 +149,9 @@ public class Chunk : MonoBehaviour
 
         ActivateDoor();
         OpenTheDoors();
+        SpawnerBehaviorEntity _playerSpawner = Instantiate(PlayerSpawner);
+        _playerSpawner.transform.position = StartingTile.transform.position;
+        _playerSpawner.SpawnEntity();
     }
 
     void OpenTheDoors()
@@ -191,7 +194,7 @@ public class Chunk : MonoBehaviour
 
         for (int y = 0; y < SpawnedTiles.GetLength(1); y++)
         {
-            for (int x = midX; x > 0; x--)
+            for (int x = midX; x >= 0; x--)
             {
                 if (SpawnedTiles[x, y] != null && x < minX) { minX = x; minX_Y = y; }
             }
@@ -213,4 +216,5 @@ public class Chunk : MonoBehaviour
         SpawnedTiles[minY_X, minY].DoorD.SetActive(true);
         DoorD = SpawnedTiles[minY_X, minY].DoorD;
     }
+    
 }

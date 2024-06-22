@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7278716699508287463}
   - component: {fileID: 7960173535833708431}
   - component: {fileID: 988780847808454334}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RandomBlock-V2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff89c70a06f0628448d0414bb4a7964f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsRandomRotate: 1
   xRotateble: 0
   yRotateble: 1
   zRotateble: 0

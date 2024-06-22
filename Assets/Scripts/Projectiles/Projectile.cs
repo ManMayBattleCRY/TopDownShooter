@@ -87,4 +87,10 @@ public class Projectile : Pooled
         Collision(collision);
     }
 
+
+
+    public Projectile SetDefault()
+    {
+        return this;
+    }
 }

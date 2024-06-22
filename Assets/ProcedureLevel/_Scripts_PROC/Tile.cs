@@ -89,4 +89,10 @@ public class Tile : MonoBehaviour
             WallL.SetActive(false);
         }
     }
+
+    public Tile SetCreator(Chunk Creator)
+    {
+        _creator = Creator;
+        return this;
+    }
 }
