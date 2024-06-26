@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class EnemyTestSpawner : MonoBehaviour
 {
-    public GameObject EnemyPrefab;
-    GameObject instance;
+    public Enemy EnemyPrefab;
+    GameObject player;
+    Enemy instance;
     float ElapsedTime;
     public float SpawnTime = 4f;
     // Start is called before the first frame update
@@ -27,4 +28,5 @@ public class EnemyTestSpawner : MonoBehaviour
             ElapsedTime += Time.deltaTime;
         }
     }
+
 }

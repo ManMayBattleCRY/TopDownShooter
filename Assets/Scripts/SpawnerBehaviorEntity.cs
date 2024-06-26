@@ -9,11 +9,12 @@ public class SpawnerBehaviorEntity : MonoBehaviour
 
 
 
-    public void SpawnEntity()
+    public GameObject SpawnEntity()
     {
        GameObject _player = Instantiate(Player);
         _player.transform.position = transform.position;
         _player.transform.position = new Vector3(_player.transform.position.x , _player.transform.position.y + Height, _player.transform.position.z);
+        return _player;
     }
 
 

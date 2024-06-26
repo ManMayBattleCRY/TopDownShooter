@@ -19,6 +19,7 @@ public class FollowCamera : MonoBehaviour
 
     Vector3 offset;
 
+    Vector3 cameraPosition;
     void Awake()
     {
         Camera = gameObject;
@@ -28,13 +29,18 @@ public class FollowCamera : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         
         Vector3 target = Player.position + offset;
         float speed = maxSpeed * Vector3.Distance(Camera.transform.position, target);
-        Camera.transform.position = Vector3.SmoothDamp(Camera.transform.position, target, ref velocity, smoothTime, speed);
+        cameraPosition = Vector3.SmoothDamp(Camera.transform.position, target, ref velocity, smoothTime, speed);
 
+    }
+
+    private void LateUpdate()
+    {
+        Camera.transform.position = cameraPosition;
     }
 
 }

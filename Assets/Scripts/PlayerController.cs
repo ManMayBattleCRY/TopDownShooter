@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody _rb;
 
     Transform _tr;
-
+    Vector3 _inputVector;
 
     private void Awake()
     {
@@ -19,16 +19,25 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _tr = GetComponent<Transform>();
     }
+    private void Start()
+    {
+        EventManager.OnPlayerSpawned();
+    }
 
     // Update is called once per frame
     void Update()
     {
         _AnimationController(InputVector());
+        _inputVector = InputVector();
+
     }
 
     private void FixedUpdate()
     {
-        _rb.MovePosition(transform.position + InputVector() * Time.deltaTime * speed);
+        Vector3 Velocity = _inputVector * speed * 0.1f;
+        Velocity.y = _rb.velocity.y;
+        _rb.velocity = Velocity;
+
     }
 
 

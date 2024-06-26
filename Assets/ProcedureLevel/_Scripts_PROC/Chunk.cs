@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using Unity.AI.Navigation;
 using UnityEngine;
 public class Chunk : MonoBehaviour
 {
     public SpawnerBehaviorEntity PlayerSpawner;
+    public EnemyTestSpawner enemyTestSpawner;
 
     [HideInInspector]
     public GameObject DoorU;
@@ -39,7 +41,8 @@ public class Chunk : MonoBehaviour
         void Start()
         {
          StartCoroutine(ChunkCreate());
-    }
+        
+        }
         
     void PlaceTile()
     {
@@ -151,7 +154,9 @@ public class Chunk : MonoBehaviour
         OpenTheDoors();
         SpawnerBehaviorEntity _playerSpawner = Instantiate(PlayerSpawner);
         _playerSpawner.transform.position = StartingTile.transform.position;
-        _playerSpawner.SpawnEntity();
+        GetComponent<NavMeshSurface>().BuildNavMesh();
+        GameObject _player = _playerSpawner.SpawnEntity();
+        EnemyTestSpawner Enemy = Instantiate(enemyTestSpawner); 
     }
 
     void OpenTheDoors()
