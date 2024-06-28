@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectile : Pooled
 {
-
+    UsingProjectiles gun;
     public float speed = 50f;
     public float damage = 25f;
     Rigidbody _rb;
@@ -15,7 +15,6 @@ public class Projectile : Pooled
     [SerializeField]
     float LifeTime = 10f;
     float timeElapsed = 0f;
-    public LVLController lvl;
 
 
     // Update is called once per frame
@@ -35,7 +34,6 @@ public class Projectile : Pooled
     private void Start()
     {
         poolManager.Pools.TryGetValue(poolName, out pool);
-        lvl = GameObject.FindGameObjectWithTag("Player").GetComponent<LVLController>();
     }
 
     public virtual void V_OnEnabale()
@@ -43,32 +41,21 @@ public class Projectile : Pooled
         transform.position = spawn.transform.position;
         transform.rotation = spawn.transform.rotation;
         _rb.AddForce(spawn.transform.forward * speed, ForceMode.Impulse);
+       // damage = gun.damage;
     }
 
     public virtual void Collision(Collision collision)
     {
         _rb.velocity = Vector3.zero;
-        if (collision.gameObject.GetComponent<HP>())
+        if (collision.gameObject.GetComponent<IDamageble>() != null)
         {
-            HP _obj = collision.gameObject.GetComponent<HP>();
-            MakeDamage(_obj);
+            collision.gameObject.GetComponent<IDamageble>().DamageTaken(damage);
         }
         pool.Return(gameObject.GetComponent<Projectile>());
     }
 
-    void MakeDamage(HP _obj)
-    {
-        if (_obj.hp - damage > 0)
-        {
-            _obj.hp -= damage;
-        }
-        else
-        {
-            Destroy(_obj.gameObject);
-            lvl.ExpirienceGet(90f);
-        }
-            
-    }
+
+           
 
     public void LifeTimeKill()
     {
@@ -89,8 +76,11 @@ public class Projectile : Pooled
 
 
 
-    public Projectile SetDefault()
+    public Projectile SetDefault(float _damage, float _speed, UsingProjectiles _gun)
     {
+        damage = _damage;
+        speed = _speed;
+        gun = _gun;
         return this;
     }
 }

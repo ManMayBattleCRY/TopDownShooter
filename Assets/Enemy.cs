@@ -1,8 +1,13 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour,IDamageble
 {
+    PlayerLevel playerLevel;
+    public float HealthPoints = 100f;
+    public float ExpForKill = 50f;
+    Animator _animator;
+    public float PlayerRadius = 0.75f;
     GameObject Player;
     bool finded = false;
     float distance = 0f;
@@ -14,6 +19,7 @@ public class Enemy : MonoBehaviour
     {
       agent =  GetComponent<NavMeshAgent>();
         EventManager.PlayerSpawned += OnPlayerSpawned;
+        _animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -34,20 +40,40 @@ public class Enemy : MonoBehaviour
 
     public void FindDestination()
     {
-        if(distance <= DistanceToFind || finded)
+        if((distance <= DistanceToFind || finded) && distance >= PlayerRadius)
         {
             finded = true;
             agent.SetDestination(Player.transform.position);
+            _animator.SetBool("PlayerFinded", true);
+            _animator.SetBool("Attack", false);
         }
-    }
+        if (distance <= PlayerRadius)
+        {
+            agent.SetDestination(transform.position);
+            _animator.SetBool("Attack", true);
+        }
+     }
 
     void OnPlayerSpawned()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
+        playerLevel = Player.GetComponent<PlayerLevel>();
     }
 
     private void OnDestroy()
     {
         EventManager.PlayerSpawned -= OnPlayerSpawned;
+    }
+
+    public void DamageTaken(float damage)
+    {
+        if (HealthPoints - damage > 0) HealthPoints -= damage;
+        else Die();
+    }
+
+    public void Die()
+    {
+        if (playerLevel != null) playerLevel.ExpirienceGet(ExpForKill);
+        Destroy(gameObject);
     }
 }

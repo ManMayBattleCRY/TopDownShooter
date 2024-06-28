@@ -72,6 +72,11 @@ public class Chunk : MonoBehaviour
         _tile._creator = this;
         _tile.transform.parent = transform;
         SpawnedTiles[_position.x, _position.y] = _tile;
+        if (Random.Range(0, 5) >= 4)
+        {
+            EnemyTestSpawner Enemy = Instantiate(enemyTestSpawner);
+            Enemy.transform.position = _tile.transform.position;
+        }
     }
 
 
@@ -151,12 +156,15 @@ public class Chunk : MonoBehaviour
         }
 
         ActivateDoor();
-        OpenTheDoors();
+        //OpenTheDoors();
         SpawnerBehaviorEntity _playerSpawner = Instantiate(PlayerSpawner);
         _playerSpawner.transform.position = StartingTile.transform.position;
         GetComponent<NavMeshSurface>().BuildNavMesh();
         GameObject _player = _playerSpawner.SpawnEntity();
-        EnemyTestSpawner Enemy = Instantiate(enemyTestSpawner); 
+
+        EnemyTestSpawner Enemy = Instantiate(enemyTestSpawner);
+        Enemy.transform.position = transform.position;
+
     }
 
     void OpenTheDoors()

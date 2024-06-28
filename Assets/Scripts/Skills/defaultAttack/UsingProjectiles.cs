@@ -52,7 +52,7 @@ public abstract class UsingProjectiles : Skill
         ProjectilePrefab.spawn = ProjectileSpawn;
         _pm = GameObject.FindGameObjectWithTag("PoolManager").GetComponent<PoolManager>();
         ProjectilePrefab.poolName = ProjectilePrefab.name;
-        _pm.CreatePool(ProjectilePrefab, MaxAmmoAmount, ProjectilePrefab.poolName);
+        _pm.CreatePool(ProjectilePrefab.SetDefault(damage,ProjectileSpeed,this), MaxAmmoAmount, ProjectilePrefab.poolName);
         _pm.Pools.TryGetValue(ProjectilePrefab.poolName, out _ProjectilePool);
         CurrentAmmoAmount = MaxAmmoAmount;
         ProjectilePrefab.damage = damage;
