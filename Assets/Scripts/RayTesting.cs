@@ -1,34 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class RayTesting : MonoBehaviour
 {
-
+    public Camera camera;
     Ray ray;
     // Start is called before the first frame update
     void Start()
     {
-        /*
-        ray.origin = transform.position;
-        ray.direction = transform.forward;
-        Debug.Log(transform.forward.ToString());
-        */
-        
-        
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        ray = new Ray(transform.position, transform.forward);
+         ray = camera.ScreenPointToRay( Input.mousePosition);
+        Debug.Log(Input.mousePosition);
         RaycastHit hit;
-        Debug.DrawRay(transform.position, transform.forward * 10f, Color.blue);
-
-             if (Physics.Raycast(ray, out hit))
-            {
+        if (Physics.Raycast(ray, out hit))
+        {
+            hit.transform.gameObject.GetComponent<Image>().color = Color.red;
+            hit.transform.gameObject.GetComponent<SpriteRenderer>().sprite = null;
             Debug.Log("hit");
-            }
+        }    
+        
     }
 }
