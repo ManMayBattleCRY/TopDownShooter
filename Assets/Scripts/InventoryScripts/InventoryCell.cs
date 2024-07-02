@@ -1,16 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using Consts;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(BoxCollider))]
 public class InventoryCell : MonoBehaviour
 {
-    public int ID;
-    bool Available = true;
+    [HideInInspector] public BoxCollider _collider;
+    [HideInInspector] public Image image;
+    [HideInInspector] public Vector2Int CellPosition;
+    [HideInInspector] public bool Available = true;
     [HideInInspector] public Inventory _inventory;
-    RaycastHit hit;
 
+    private void Awake()
+    {
+        image = GetComponent<Image>();
+        _collider = GetComponent<BoxCollider>();
+        _collider.size = new Vector3(Const.ICellSize, Const.ICellSize, 1);
+    }
 
 
 

@@ -4,8 +4,9 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     Animator _ac;
- 
 
+    bool opened;
+    public GameObject InventoryCanvas;
     [SerializeField]
     float speed = 10f;
     Rigidbody _rb;
@@ -29,6 +30,12 @@ public class PlayerController : MonoBehaviour
     {
         _AnimationController(InputVector());
         _inputVector = InputVector();
+
+        if (Input.GetKeyDown("i"))
+        {
+            if(opened) { InventoryCanvas.SetActive(false); opened = false; }
+            else{ InventoryCanvas.SetActive(true); opened = true;}
+        }
 
     }
 

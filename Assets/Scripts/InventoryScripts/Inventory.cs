@@ -5,34 +5,23 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public InventoryCell CellPreafb;
-    [HideInInspector] public Dictionary<int, InventoryCell> Cells;
+    [HideInInspector] public InventoryCell[,] Cells;
     public Vector2Int InventorySize = new Vector2Int(6, 5);
+    bool open = false;
 
     private void Awake()
     {
-        Cells = new Dictionary<int, InventoryCell>();
-        int i = 1;
+        Cells = new InventoryCell[InventorySize.x, InventorySize.y];
         for (int y = 0; y < InventorySize.y; y++)
         {
             for (int x = 0; x < InventorySize.x; x++)
             {
                 InventoryCell _cell = Instantiate(CellPreafb, transform);
-                _cell.ID = i;
+                _cell.CellPosition = new Vector2Int(x, y);
                 _cell._inventory = this;
-                Cells.Add(i, _cell);
-                i++;
+                Cells[x,y] = _cell;
             }
         }
     }
 
-    void Start()
-    {
-       
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

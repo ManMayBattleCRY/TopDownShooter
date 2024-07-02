@@ -89,7 +89,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78d27d0738937114198accd72e9c532c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
+  image: {fileID: 0}
+  CellPosition: {x: 0, y: 0}
+  Available: 1
   _inventory: {fileID: 0}
 --- !u!65 &-9118870165491522953
 BoxCollider:
