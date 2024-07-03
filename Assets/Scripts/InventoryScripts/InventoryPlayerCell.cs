@@ -7,12 +7,7 @@ public class InventoryPlayerCell : InventoryCell
     public buckshot _buckshot;
     public InventoryItem item1;
     public InventoryItem item2;
-    public enum PlayerCellType
-        {
-        Weapon,
-        _default
-        };
-    public PlayerCellType cellType;
+
 
     private void Start()
     {
@@ -21,11 +16,18 @@ public class InventoryPlayerCell : InventoryCell
         
     }
 
-    void TakeWeapon()
+    void TakeWeapon(ItemData _itemData)
     {
-        if (!Available && cellType == PlayerCellType.Weapon)
+        if (!Available && _itemData.WeaponType == ItemData.WeaponTypeEnum.Weapon)
         { 
             _Weapon.enabled = true;
+            _buckshot.enabled = false;
+        }
+
+        if (!Available && _itemData.WeaponType == ItemData.WeaponTypeEnum.Shotgun)
+        {
+            _buckshot.enabled = true;
+            _Weapon.enabled = false;
         }
     }
 }

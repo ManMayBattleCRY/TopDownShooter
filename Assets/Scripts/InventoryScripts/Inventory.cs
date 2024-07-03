@@ -7,7 +7,6 @@ public class Inventory : MonoBehaviour
     public InventoryCell CellPreafb;
     [HideInInspector] public InventoryCell[,] Cells;
     public Vector2Int InventorySize = new Vector2Int(6, 5);
-    bool open = false;
 
     private void Awake()
     {

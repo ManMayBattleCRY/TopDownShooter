@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    public static event Action endDrag;
+    public static event Action<ItemData> endDrag;
 
     InventoryCell cell;
     public Inventory inventory;
@@ -27,6 +27,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        
         PreDragPosition = transform.position;
         OffSet = Input.mousePosition - _transform.position;
         StartPosition.x = transform.position.x - mid.x;
@@ -97,7 +98,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         {
             PreDragPositionEnd();
         }
-        endDrag?.Invoke();
+        endDrag?.Invoke( _itemData);
     }
 
     private void Awake()

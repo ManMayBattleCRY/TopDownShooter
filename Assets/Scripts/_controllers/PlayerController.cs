@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Animator _ac;
 
-    bool opened;
+    [HideInInspector]public bool opened;
     public GameObject InventoryCanvas;
     [SerializeField]
     float speed = 10f;
@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
             if(opened) { InventoryCanvas.SetActive(false); opened = false; }
             else{ InventoryCanvas.SetActive(true); opened = true;}
         }
+
+
 
     }
 

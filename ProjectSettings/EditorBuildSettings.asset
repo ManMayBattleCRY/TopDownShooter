@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/_Hideout.unity
-    guid: ee7774b9b8c4833459d3bcfd6c26f2cb
-  - enabled: 1
-    path: Assets/Scenes/ProcedureTesting.unity
-    guid: b257db004c797c84eaef512667eca614
+    path: Assets/Scenes/Testing.unity
+    guid: af94512c3832f94428de753fec0200a2
   m_configObjects: {}

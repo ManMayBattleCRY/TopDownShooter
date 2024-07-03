@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public abstract class UsingProjectiles : Skill
 {
+    public PlayerController Controller;
     public Transform ProjectileSpawn;
     public Projectile ProjectilePrefab;
     public Pool<Pooled> _ProjectilePool;
@@ -29,26 +30,30 @@ public abstract class UsingProjectiles : Skill
     public void V_Update()
     {
         V_ElapsedTime();
-        if (InputButtonMod() && !reloading)
+        if (!Controller.opened)
         {
-            if (CurrentAmmoAmount > 0)
+            if (InputButtonMod() && !reloading)
             {
-                if (isReady)
+                if (CurrentAmmoAmount > 0)
                 {
-                    FireAProjectile();
-                    CurrentAmmoAmount -= 1;
-                    AmmoAmountChange();
+                    if (isReady)
+                    {
+                        FireAProjectile();
+                        CurrentAmmoAmount -= 1;
+                        AmmoAmountChange();
+                    }
                 }
-            }
-            else Reload();
+                else Reload();
 
+            }
+            if (Input.GetButtonDown("Reload")) Reload();
+            if (reloading) Reload();
         }
-        if (Input.GetButtonDown("Reload")) Reload();
-        if (reloading) Reload();
     }
 
     public void V_Start()
     {
+        Controller = gameObject.GetComponent<PlayerController>();
         ProjectilePrefab.spawn = ProjectileSpawn;
         _pm = GameObject.FindGameObjectWithTag("PoolManager").GetComponent<PoolManager>();
         ProjectilePrefab.poolName = ProjectilePrefab.name;

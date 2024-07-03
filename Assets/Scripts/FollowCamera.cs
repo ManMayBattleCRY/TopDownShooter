@@ -1,21 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FollowCamera : MonoBehaviour
 {
+
     GameObject Camera;
 
     [SerializeField]
     Transform Player;
 
     [SerializeField]
-    float smoothTime = 0.1f;
+    float Speed = 10f;
 
-    [SerializeField]
-    float maxSpeed = 10f;
-
-    Vector3 velocity;
+    float ElapsedTime;
 
     Vector3 offset;
 
@@ -29,18 +25,16 @@ public class FollowCamera : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        
+
         Vector3 target = Player.position + offset;
-        float speed = maxSpeed * Vector3.Distance(Camera.transform.position, target);
-        cameraPosition = Vector3.SmoothDamp(Camera.transform.position, target, ref velocity, smoothTime, speed);
-
-    }
-
-    private void LateUpdate()
-    {
+        cameraPosition = Vector3.Lerp(Camera.transform.position, target, Speed * Time.deltaTime);
         Camera.transform.position = cameraPosition;
+
+
     }
+
+
 
 }

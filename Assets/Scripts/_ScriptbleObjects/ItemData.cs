@@ -9,15 +9,14 @@ public class ItemData : ScriptableObject
 
     [SerializeField] private Vector2Int _CellSize;
     public  Vector2Int CellSize => _CellSize;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
+    public enum WeaponTypeEnum
+        {
+        Weapon,
+        Shotgun
+        };
+    [SerializeField] private WeaponTypeEnum _WeaponType;
+    public WeaponTypeEnum WeaponType => _WeaponType;
+
         
-    }
 }
