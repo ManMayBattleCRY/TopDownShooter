@@ -1,13 +1,16 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class FollowCamera : MonoBehaviour
 {
-
+    
     GameObject Camera;
 
+    [Header("Залупа")]
+   
     [SerializeField]
     Transform Player;
-
+    
     [SerializeField]
     float Speed = 10f;
 

@@ -1,4 +1,4 @@
-using Consts;
+using Const = Constants.ConstsValue;
 using UnityEngine;
 
 public class InventoryPlayerCell : InventoryCell

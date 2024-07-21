@@ -30,9 +30,8 @@ public class LookAtMouse : MonoBehaviour
         if( Physics.Raycast(ray, out hit, 50f ,  layers))
         {
             pointer.position = hit.point;
-
             player.LookAt(new Vector3(hit.point.x, player.transform.position.y, hit.point.z));
-
+            
         }
 
     }

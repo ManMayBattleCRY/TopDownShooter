@@ -1,8 +1,16 @@
-namespace Consts
+
+using UnityEngine;
+
+namespace Constants
 {
-    public static class Const
+    public static class ConstsValue
     {
+
         public const int ICellSize = 100;
     }
 }
+
+
+
+
 

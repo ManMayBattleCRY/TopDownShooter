@@ -2042,7 +2042,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4994615987100575094}
   - component: {fileID: 6769550354592028316}
-  - component: {fileID: 4969276527331874308}
   - component: {fileID: 6427836477777202849}
   m_Layer: 0
   m_Name: UICamara
@@ -5728,14 +5727,6 @@ Transform:
   - {fileID: 3378522461380004297}
   m_Father: {fileID: 5650380172081952151}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &4969276527331874308
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1293251845162946036}
-  m_Enabled: 1
 --- !u!4 &4994615987100575094
 Transform:
   m_ObjectHideFlags: 0

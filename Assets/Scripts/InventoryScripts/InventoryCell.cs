@@ -1,6 +1,6 @@
-using Consts;
 using UnityEngine;
 using UnityEngine.UI;
+using Const = Constants.ConstsValue;
 
 [RequireComponent(typeof(BoxCollider))]
 public class InventoryCell : MonoBehaviour

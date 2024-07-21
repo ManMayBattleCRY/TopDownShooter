@@ -1,11 +1,14 @@
+//using cons = Constants.ConstsValue;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
+
 public class LevelLoad : MonoBehaviour
 {
+    
     public GameObject LoadingScreen;
     bool isloading = false;
     public byte SceneID = 1;
@@ -14,7 +17,6 @@ public class LevelLoad : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     private void Update()
@@ -37,3 +39,5 @@ public class LevelLoad : MonoBehaviour
         
     }
 }
+
+

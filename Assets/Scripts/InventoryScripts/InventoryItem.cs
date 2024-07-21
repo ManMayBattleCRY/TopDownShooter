@@ -1,12 +1,12 @@
-using Consts;
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
+using Const = Constants.ConstsValue;
 
 public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    public static event Action<ItemData> endDrag;
+    public static event System.Action<ItemData> endDrag;
 
     InventoryCell cell;
     public Inventory inventory;
