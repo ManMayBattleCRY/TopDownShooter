@@ -1,21 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : Projectile
+namespace Game
 {
-
-    private void OnEnable()
+    public class Bullet : Projectile
     {
-        V_OnEnabale();
+
+        private void OnEnable()
+        {
+            V_OnEnabale();
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            Collision(collision);
+        }
+
+
+
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Collision(collision);
-    }
-
-
 
 }

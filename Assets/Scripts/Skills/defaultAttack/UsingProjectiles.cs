@@ -3,98 +3,102 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class UsingProjectiles : Skill
+namespace Game
 {
-    public PlayerController Controller;
-    public Transform ProjectileSpawn;
-    public Projectile ProjectilePrefab;
-    public Pool<Pooled> _ProjectilePool;
-    public float ProjectileSpeed = 50f;
-    public ChChange change;
-    public PoolManager _pm;
-    [HideInInspector]
-    public bool reloading = false;
-    public float ReloadTime = 1.5f;
-    float ElapsedReloadTime = 0;
-
-    public Text AmmoAmountText;
-
-    [HideInInspector]
-    public int CurrentAmmoAmount;
-    public int MaxAmmoAmount = 1;
-
-    public abstract void FireAProjectile();
-    public abstract bool InputButtonMod();
-
-
-    public void V_Update()
+    public abstract class UsingProjectiles : Skill
     {
-        V_ElapsedTime();
-        if (!Controller.opened)
+        public PlayerController Controller;
+        public Transform ProjectileSpawn;
+        public Projectile ProjectilePrefab;
+        public Pool<Pooled> _ProjectilePool;
+        public float ProjectileSpeed = 50f;
+        public ChChange change;
+        public PoolManager _pm;
+        [HideInInspector]
+        public bool reloading = false;
+        public float ReloadTime = 1.5f;
+        float ElapsedReloadTime = 0;
+
+        public Text AmmoAmountText;
+
+        [HideInInspector]
+        public int CurrentAmmoAmount;
+        public int MaxAmmoAmount = 1;
+
+        public abstract void FireAProjectile();
+        public abstract bool InputButtonMod();
+
+
+        public void V_Update()
         {
-            if (InputButtonMod() && !reloading)
+            V_ElapsedTime();
+            if (!Controller.opened)
             {
-                if (CurrentAmmoAmount > 0)
+                if (InputButtonMod() && !reloading)
                 {
-                    if (isReady)
+                    if (CurrentAmmoAmount > 0)
                     {
-                        FireAProjectile();
-                        CurrentAmmoAmount -= 1;
-                        AmmoAmountChange();
+                        if (isReady)
+                        {
+                            FireAProjectile();
+                            CurrentAmmoAmount -= 1;
+                            AmmoAmountChange();
+                        }
                     }
+                    else Reload();
+
                 }
-                else Reload();
-
+                if (Input.GetButtonDown("Reload")) Reload();
+                if (reloading) Reload();
             }
-            if (Input.GetButtonDown("Reload")) Reload();
-            if (reloading) Reload();
-        }
-    }
-
-    public void V_Start()
-    {
-        Controller = gameObject.GetComponent<PlayerController>();
-        ProjectilePrefab.spawn = ProjectileSpawn;
-        _pm = GameObject.FindGameObjectWithTag("PoolManager").GetComponent<PoolManager>();
-        ProjectilePrefab.poolName = ProjectilePrefab.name;
-        _pm.CreatePool(ProjectilePrefab.SetDefault(damage,ProjectileSpeed,this), MaxAmmoAmount, ProjectilePrefab.poolName);
-        _pm.Pools.TryGetValue(ProjectilePrefab.poolName, out _ProjectilePool);
-        CurrentAmmoAmount = MaxAmmoAmount;
-        ProjectilePrefab.damage = damage;
-        ProjectilePrefab.speed = ProjectileSpeed;
-        AmmoAmountChange();
-    }
-
-    public void V_OnEnable()
-    {
-        change._proj = this;
-        AmmoAmountChange();
-    }
-
-    public void AmmoAmountChange()
-    {
-        AmmoAmountText.text = CurrentAmmoAmount.ToString() + "/" + MaxAmmoAmount.ToString();
-    }
-
-    public void Reload()
-    {
-        if (!reloading && CurrentAmmoAmount < MaxAmmoAmount)
-        {
-            reloading = true;
-
         }
 
-        if (reloading)
+        public void V_Start()
         {
-            ElapsedReloadTime += Time.deltaTime;
-            if (ElapsedReloadTime >= ReloadTime)
+            Controller = gameObject.GetComponent<PlayerController>();
+            ProjectilePrefab.spawn = ProjectileSpawn;
+            _pm = GameObject.FindGameObjectWithTag("PoolManager").GetComponent<PoolManager>();
+            ProjectilePrefab.poolName = ProjectilePrefab.name;
+            _pm.CreatePool(ProjectilePrefab.SetDefault(damage, ProjectileSpeed, this), MaxAmmoAmount, ProjectilePrefab.poolName);
+            _pm.Pools.TryGetValue(ProjectilePrefab.poolName, out _ProjectilePool);
+            CurrentAmmoAmount = MaxAmmoAmount;
+            ProjectilePrefab.damage = damage;
+            ProjectilePrefab.speed = ProjectileSpeed;
+            AmmoAmountChange();
+        }
+
+        public void V_OnEnable()
+        {
+            change._proj = this;
+            AmmoAmountChange();
+        }
+
+        public void AmmoAmountChange()
+        {
+            AmmoAmountText.text = CurrentAmmoAmount.ToString() + "/" + MaxAmmoAmount.ToString();
+        }
+
+        public void Reload()
+        {
+            if (!reloading && CurrentAmmoAmount < MaxAmmoAmount)
             {
-                CurrentAmmoAmount = MaxAmmoAmount;
-                AmmoAmountChange();
-                reloading = false;
-                ElapsedReloadTime = 0f;
+                reloading = true;
 
+            }
+
+            if (reloading)
+            {
+                ElapsedReloadTime += Time.deltaTime;
+                if (ElapsedReloadTime >= ReloadTime)
+                {
+                    CurrentAmmoAmount = MaxAmmoAmount;
+                    AmmoAmountChange();
+                    reloading = false;
+                    ElapsedReloadTime = 0f;
+
+                }
             }
         }
     }
+
 }

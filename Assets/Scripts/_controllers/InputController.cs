@@ -1,17 +1,15 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 
 namespace Game
 {
-    using InputMode = Game.InputSpace.InputControllerReference;
     namespace InputSpace
     {
         public class InputControllerReference : MonoBehaviour
         {
-            HashSet<string> ab = new HashSet<string> ();
+            HashSet<string> ActionsHashSet = new HashSet<string> ();
             Dictionary<string, Action> Actions = new Dictionary<string, Action>();
             [HideInInspector] public enum InputType
             {
@@ -34,31 +32,90 @@ namespace Game
 
             public void Subscribe(string InputName, InputType inputType, Action AddingAction, bool FixedUpdate)
             {
-                string ActionName = TranslateAction(InputName, inputType,AddingAction, FixedUpdate);
-                if (Actions.ContainsKey(ActionName))
+
+                string _dictionary = TranslateActionForDictionary(InputName, inputType, FixedUpdate);
+                string _Hash = TranslateActionForHashSet(InputName, inputType,AddingAction, FixedUpdate);
+                if (ActionsHashSet.Contains(_Hash))
                 {
-                    Actions[ActionName] += AddingAction;
+                    Actions[ _dictionary] += AddingAction;
                 }
                 else
                 {
-                    CreateAction(ActionName, InputName, inputType, AddingAction, FixedUpdate);
+                    if (Actions.ContainsKey(_dictionary))
+                    {
+                        Actions[_dictionary] += AddingAction;
+                        ActionsHashSet.Add(_Hash);
+                    }
+                    else
+                    {
+                        CreateAction(InputName, inputType, AddingAction, FixedUpdate);
+                    }
+
                 }
 
             }
             public void Dispose(string InputName, InputType inputType, Action RemovingActiong, bool FixedUpdate)
             {
-                string ActionName = TranslateAction(InputName, inputType, RemovingActiong, FixedUpdate);
-                if (Actions.ContainsKey(ActionName))
+                string _dictionary = TranslateActionForDictionary(InputName, inputType, FixedUpdate);
+                string _Hash = TranslateActionForHashSet(InputName, inputType, RemovingActiong, FixedUpdate);
+                if (ActionsHashSet.Contains(_Hash))
                 {
-                    Actions[ActionName] -= RemovingActiong;
-                    if (Actions[ActionName] == null) Actions.Remove(ActionName);
+                    ActionsHashSet.Remove(_Hash);
+                    Actions[_dictionary] -= RemovingActiong;
+                    if (Actions[_dictionary] == null) Actions.Remove(_dictionary);
                 }
             }
 
 
 
 
-            String TranslateAction(string InputName, InputType inputType,Action action, bool FixedUpdate) 
+            String TranslateActionForDictionary(string InputName, InputType inputType, bool FixedUpdate) 
+            {
+                string actionName = null;
+                switch (inputType)
+                {
+                    case InputType.up:
+                        if (!FixedUpdate)
+                        {
+                            actionName = InputName + "Up";
+
+                        }
+                        else
+                        {
+                            actionName = InputName + "Up" + "FixedUpdate";
+
+                        }
+                        break;
+
+                    case InputType.hold:
+                        if (!FixedUpdate)
+                        {
+                            actionName = InputName + "Hold";
+                        }
+                        else
+                        {
+                            actionName = InputName + "Hold" + "FixedUpdate";
+                        }
+                        break;
+
+                    case InputType.down:
+                        if (!FixedUpdate)
+                        {
+                            actionName = InputName + "Down";
+                        }
+                        else
+                        {
+                            actionName = InputName + "Down" + "FixedUpdate";
+                        }
+                        break;
+
+                }
+                return actionName;
+
+            }
+
+
+            String TranslateActionForHashSet(string InputName, InputType inputType, Action action, bool FixedUpdate)
             {
                 string actionName = null;
                 switch (inputType)
@@ -103,21 +160,24 @@ namespace Game
 
             }
 
-            void CreateAction(string ActionName, string InputName, InputType inputType, Action AddingAction, bool FixedUpdate)
+            void CreateAction(string InputName, InputType inputType, Action AddingAction, bool FixedUpdate)
             {
-                Actions.TryAdd(ActionName, AddingAction);
+                string _dictionary = TranslateActionForDictionary(InputName, inputType, FixedUpdate);
+                string _Hash = TranslateActionForHashSet(InputName, inputType, AddingAction, FixedUpdate);
+                ActionsHashSet.Add(_Hash);
+                Actions.Add(_dictionary, AddingAction);
                 if (!FixedUpdate)
                 {
                     switch (inputType)
                     {
                         case InputType.up:
-                            UpdateAction += () => { if (Input.GetButtonUp(InputName)) Actions[ActionName]?.Invoke(); };
+                            UpdateAction += () => { if (Input.GetButtonUp(InputName)) Actions[_dictionary]?.Invoke(); };
                             break;
                         case InputType.hold:
-                            UpdateAction += () => { if (Input.GetButton(InputName)) Actions[ActionName]?.Invoke(); };
+                            UpdateAction += () => { if (Input.GetButton(InputName)) Actions[_dictionary]?.Invoke(); };
                             break;
                         case InputType.down:
-                            UpdateAction += () => { if (Input.GetButtonDown(InputName)) Actions[ActionName]?.Invoke(); };
+                            UpdateAction += () => { if (Input.GetButtonDown(InputName)) Actions[_dictionary]?.Invoke(); };
                             break;
                     }
                 }
@@ -126,13 +186,13 @@ namespace Game
                     switch (inputType)
                     {
                         case InputType.up:
-                            FixedUpdateAction += () => { if (Input.GetButtonUp(InputName)) Actions[ActionName]?.Invoke(); };
+                            FixedUpdateAction += () => { if (Input.GetButtonUp(InputName)) Actions[_dictionary]?.Invoke(); };
                             break;
                         case InputType.hold:
-                            FixedUpdateAction += () => { if (Input.GetButton(InputName)) Actions[ActionName]?.Invoke(); };
+                            FixedUpdateAction += () => { if (Input.GetButton(InputName)) Actions[_dictionary]?.Invoke(); };
                             break;
                         case InputType.down:
-                            FixedUpdateAction += () => { if (Input.GetButtonDown(InputName)) Actions[ActionName]?.Invoke(); };
+                            FixedUpdateAction += () => { if (Input.GetButtonDown(InputName)) Actions[_dictionary]?.Invoke(); };
                             break;
                     }
                 }
